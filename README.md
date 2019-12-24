@@ -12,7 +12,7 @@
 本系统包括：营销管理、客户管理、服务管理、统计报表和基础数据五个功能模块。另包括权限管理模块用于系统的用户、角色和相关权限。
 ## 下载地址
 * 演示地址：[这是一个演示地址](http://49.235.45.212:8080/springboot_crm-0.0.1-SNAPSHOT/)（账号：admin 密码：admin）
-* 下载地址：[这是一个下载地址](https://github.com/q1225836379/testMaven.git)
+* 下载地址：[这是一个下载地址](https://github.com/Gxuxu-cpu/springboot-crm)
 ## 主要技术栈
 后端：Springboot+Spring MVC+Mybatis+Maven<br>
 前端：ajax+jquery
