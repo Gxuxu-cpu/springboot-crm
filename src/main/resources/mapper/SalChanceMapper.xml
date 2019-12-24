@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.mapper.SalChanceMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.SalChance" >
+    <id column="chc_id" property="chcId" jdbcType="BIGINT" />
+    <result column="chc_source" property="chcSource" jdbcType="VARCHAR" />
+    <result column="chc_cust_name" property="chcCustName" jdbcType="VARCHAR" />
+    <result column="chc_title" property="chcTitle" jdbcType="VARCHAR" />
+    <result column="chc_rate" property="chcRate" jdbcType="INTEGER" />
+    <result column="chc_linkman" property="chcLinkman" jdbcType="VARCHAR" />
+    <result column="chc_tel" property="chcTel" jdbcType="VARCHAR" />
+    <result column="chc_desc" property="chcDesc" jdbcType="VARCHAR" />
+    <result column="chc_create_id" property="chcCreateId" jdbcType="BIGINT" />
+    <result column="chc_create_by" property="chcCreateBy" jdbcType="VARCHAR" />
+    <result column="chc_create_date" property="chcCreateDate" jdbcType="TIMESTAMP" />
+    <result column="chc_due_id" property="chcDueId" jdbcType="BIGINT" />
+    <result column="chc_due_to" property="chcDueTo" jdbcType="VARCHAR" />
+    <result column="chc_due_date" property="chcDueDate" jdbcType="TIMESTAMP" />
+    <result column="chc_status" property="chcStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    chc_id, chc_source, chc_cust_name, chc_title, chc_rate, chc_linkman, chc_tel, chc_desc, 
+    chc_create_id, chc_create_by, chc_create_date, chc_due_id, chc_due_to, chc_due_date, 
+    chc_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.bean.SalChanceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sal_chance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sal_chance
+    where chc_id = #{chcId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sal_chance
+    where chc_id = #{chcId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.bean.SalChanceExample" >
+    delete from sal_chance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.SalChance" >
+    insert into sal_chance (chc_id, chc_source, chc_cust_name, 
+      chc_title, chc_rate, chc_linkman, 
+      chc_tel, chc_desc, chc_create_id, 
+      chc_create_by, chc_create_date, chc_due_id, 
+      chc_due_to, chc_due_date, chc_status
+      )
+    values (#{chcId,jdbcType=BIGINT}, #{chcSource,jdbcType=VARCHAR}, #{chcCustName,jdbcType=VARCHAR}, 
+      #{chcTitle,jdbcType=VARCHAR}, #{chcRate,jdbcType=INTEGER}, #{chcLinkman,jdbcType=VARCHAR}, 
+      #{chcTel,jdbcType=VARCHAR}, #{chcDesc,jdbcType=VARCHAR}, #{chcCreateId,jdbcType=BIGINT}, 
+      #{chcCreateBy,jdbcType=VARCHAR}, #{chcCreateDate,jdbcType=TIMESTAMP}, #{chcDueId,jdbcType=BIGINT}, 
+      #{chcDueTo,jdbcType=VARCHAR}, #{chcDueDate,jdbcType=TIMESTAMP}, #{chcStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.SalChance" >
+    insert into sal_chance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chcId != null" >
+        chc_id,
+      </if>
+      <if test="chcSource != null" >
+        chc_source,
+      </if>
+      <if test="chcCustName != null" >
+        chc_cust_name,
+      </if>
+      <if test="chcTitle != null" >
+        chc_title,
+      </if>
+      <if test="chcRate != null" >
+        chc_rate,
+      </if>
+      <if test="chcLinkman != null" >
+        chc_linkman,
+      </if>
+      <if test="chcTel != null" >
+        chc_tel,
+      </if>
+      <if test="chcDesc != null" >
+        chc_desc,
+      </if>
+      <if test="chcCreateId != null" >
+        chc_create_id,
+      </if>
+      <if test="chcCreateBy != null" >
+        chc_create_by,
+      </if>
+      <if test="chcCreateDate != null" >
+        chc_create_date,
+      </if>
+      <if test="chcDueId != null" >
+        chc_due_id,
+      </if>
+      <if test="chcDueTo != null" >
+        chc_due_to,
+      </if>
+      <if test="chcDueDate != null" >
+        chc_due_date,
+      </if>
+      <if test="chcStatus != null" >
+        chc_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chcId != null" >
+        #{chcId,jdbcType=BIGINT},
+      </if>
+      <if test="chcSource != null" >
+        #{chcSource,jdbcType=VARCHAR},
+      </if>
+      <if test="chcCustName != null" >
+        #{chcCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="chcTitle != null" >
+        #{chcTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="chcRate != null" >
+        #{chcRate,jdbcType=INTEGER},
+      </if>
+      <if test="chcLinkman != null" >
+        #{chcLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="chcTel != null" >
+        #{chcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="chcDesc != null" >
+        #{chcDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="chcCreateId != null" >
+        #{chcCreateId,jdbcType=BIGINT},
+      </if>
+      <if test="chcCreateBy != null" >
+        #{chcCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="chcCreateDate != null" >
+        #{chcCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chcDueId != null" >
+        #{chcDueId,jdbcType=BIGINT},
+      </if>
+      <if test="chcDueTo != null" >
+        #{chcDueTo,jdbcType=VARCHAR},
+      </if>
+      <if test="chcDueDate != null" >
+        #{chcDueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chcStatus != null" >
+        #{chcStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.bean.SalChanceExample" resultType="java.lang.Integer" >
+    select count(*) from sal_chance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sal_chance
+    <set >
+      <if test="record.chcId != null" >
+        chc_id = #{record.chcId,jdbcType=BIGINT},
+      </if>
+      <if test="record.chcSource != null" >
+        chc_source = #{record.chcSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcCustName != null" >
+        chc_cust_name = #{record.chcCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcTitle != null" >
+        chc_title = #{record.chcTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcRate != null" >
+        chc_rate = #{record.chcRate,jdbcType=INTEGER},
+      </if>
+      <if test="record.chcLinkman != null" >
+        chc_linkman = #{record.chcLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcTel != null" >
+        chc_tel = #{record.chcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcDesc != null" >
+        chc_desc = #{record.chcDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcCreateId != null" >
+        chc_create_id = #{record.chcCreateId,jdbcType=BIGINT},
+      </if>
+      <if test="record.chcCreateBy != null" >
+        chc_create_by = #{record.chcCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcCreateDate != null" >
+        chc_create_date = #{record.chcCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chcDueId != null" >
+        chc_due_id = #{record.chcDueId,jdbcType=BIGINT},
+      </if>
+      <if test="record.chcDueTo != null" >
+        chc_due_to = #{record.chcDueTo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcDueDate != null" >
+        chc_due_date = #{record.chcDueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chcStatus != null" >
+        chc_status = #{record.chcStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sal_chance
+    set chc_id = #{record.chcId,jdbcType=BIGINT},
+      chc_source = #{record.chcSource,jdbcType=VARCHAR},
+      chc_cust_name = #{record.chcCustName,jdbcType=VARCHAR},
+      chc_title = #{record.chcTitle,jdbcType=VARCHAR},
+      chc_rate = #{record.chcRate,jdbcType=INTEGER},
+      chc_linkman = #{record.chcLinkman,jdbcType=VARCHAR},
+      chc_tel = #{record.chcTel,jdbcType=VARCHAR},
+      chc_desc = #{record.chcDesc,jdbcType=VARCHAR},
+      chc_create_id = #{record.chcCreateId,jdbcType=BIGINT},
+      chc_create_by = #{record.chcCreateBy,jdbcType=VARCHAR},
+      chc_create_date = #{record.chcCreateDate,jdbcType=TIMESTAMP},
+      chc_due_id = #{record.chcDueId,jdbcType=BIGINT},
+      chc_due_to = #{record.chcDueTo,jdbcType=VARCHAR},
+      chc_due_date = #{record.chcDueDate,jdbcType=TIMESTAMP},
+      chc_status = #{record.chcStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SalChance" >
+    update sal_chance
+    <set >
+      <if test="chcSource != null" >
+        chc_source = #{chcSource,jdbcType=VARCHAR},
+      </if>
+      <if test="chcCustName != null" >
+        chc_cust_name = #{chcCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="chcTitle != null" >
+        chc_title = #{chcTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="chcRate != null" >
+        chc_rate = #{chcRate,jdbcType=INTEGER},
+      </if>
+      <if test="chcLinkman != null" >
+        chc_linkman = #{chcLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="chcTel != null" >
+        chc_tel = #{chcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="chcDesc != null" >
+        chc_desc = #{chcDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="chcCreateId != null" >
+        chc_create_id = #{chcCreateId,jdbcType=BIGINT},
+      </if>
+      <if test="chcCreateBy != null" >
+        chc_create_by = #{chcCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="chcCreateDate != null" >
+        chc_create_date = #{chcCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chcDueId != null" >
+        chc_due_id = #{chcDueId,jdbcType=BIGINT},
+      </if>
+      <if test="chcDueTo != null" >
+        chc_due_to = #{chcDueTo,jdbcType=VARCHAR},
+      </if>
+      <if test="chcDueDate != null" >
+        chc_due_date = #{chcDueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chcStatus != null" >
+        chc_status = #{chcStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where chc_id = #{chcId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SalChance" >
+    update sal_chance
+    set chc_source = #{chcSource,jdbcType=VARCHAR},
+      chc_cust_name = #{chcCustName,jdbcType=VARCHAR},
+      chc_title = #{chcTitle,jdbcType=VARCHAR},
+      chc_rate = #{chcRate,jdbcType=INTEGER},
+      chc_linkman = #{chcLinkman,jdbcType=VARCHAR},
+      chc_tel = #{chcTel,jdbcType=VARCHAR},
+      chc_desc = #{chcDesc,jdbcType=VARCHAR},
+      chc_create_id = #{chcCreateId,jdbcType=BIGINT},
+      chc_create_by = #{chcCreateBy,jdbcType=VARCHAR},
+      chc_create_date = #{chcCreateDate,jdbcType=TIMESTAMP},
+      chc_due_id = #{chcDueId,jdbcType=BIGINT},
+      chc_due_to = #{chcDueTo,jdbcType=VARCHAR},
+      chc_due_date = #{chcDueDate,jdbcType=TIMESTAMP},
+      chc_status = #{chcStatus,jdbcType=VARCHAR}
+    where chc_id = #{chcId,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 写分页查询，逆向功能就无法使用了 ，使用pageInfo进行分页查询，查询salChance
+   SELECT  * FROM  `sal_chance` WHERE chc_status = '1' LIMIT #{start},#{pageSize}
+     不满足条件查询，开始写条件查询
+     如何通过pageInfo 获取到 chc_cust_name
+     PageInfo<SalChance>  T=>SaleChance entity就是SalChance的实例  entity.chcCustName
+     条件查询的时候，不输入不起作用，也就是查询全部
+     销售机会管理是状态为1的，
+     开发计划是状态为2的，所有下面的语句块儿需要两个功能都适用
+  -->
+
+  <select id="selectSalChanceByPageInfo" parameterType="com.crm.support.PageInfo" resultMap="BaseResultMap">	 
+     SELECT * FROM `sal_chance` 
+     <where>
+     	<!-- 当chcCustName不为空而且不等于空格的时候起作用 -->
+     	 <if test="entity.chcCustName!=null and entity.chcCustName!=''">
+	    	 AND chc_cust_name LIKE '%${entity.chcCustName}%' 
+	     </if>
+	     <if test="entity.chcTitle!=null and entity.chcTitle!=''">
+	     	 AND chc_title LIKE '%${entity.chcTitle}%' 
+	     </if>
+	     <if test="entity.chcLinkman!=null and entity.chcLinkman!=''">
+	     	 AND chc_linkman LIKE '%${entity.chcLinkman}%'
+	     </if>
+	     <!-- 需要ifelse 适用于两个模块儿 -->
+	     <choose>
+	        <when test="entity.chcStatus==1">
+	            and chc_status = '1'  
+	        </when>
+	        <otherwise>
+	            and chc_status != '1'
+	        </otherwise>
+	    </choose>
+  	 </where>
+  	 LIMIT #{start},#{pageSize}
+  </select>
+  
+  <!-- 查询条数 
+  		 SELECT  count(*) FROM  `sal_chance` where chc_status = '1'
+  		 根据条件查询。
+  -->
+  <select id="selectCountByPageInfo" parameterType="com.crm.support.PageInfo" resultType="int">
+  	 SELECT  count(*) FROM  `sal_chance` 
+  	 <where>
+     	<!-- 当chcCustName不为空而且不等于空格的时候起作用 -->
+     	 <if test="entity.chcCustName!=null and entity.chcCustName!=''">
+	    	 AND chc_cust_name LIKE '%${entity.chcCustName}%' 
+	     </if>
+	     <if test="entity.chcTitle!=null and entity.chcTitle!=''">
+	     	 AND chc_title LIKE '%${entity.chcTitle}%' 
+	     </if>
+	     <if test="entity.chcLinkman!=null and entity.chcLinkman!=''">
+	     	 AND chc_linkman LIKE '%${entity.chcLinkman}%'
+	     </if>
+	     <!-- 需要ifelse 适用于两个模块儿 -->
+	     <choose>
+	        <when test="entity.chcStatus==1">
+	            and chc_status = '1'  
+	        </when>
+	        <otherwise>
+	            and chc_status != '1'
+	        </otherwise>
+	    </choose>
+  	 </where>
+  </select>
+  
+</mapper>

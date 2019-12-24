@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.Product" >
+    <id column="prod_id" property="prodId" jdbcType="BIGINT" />
+    <result column="prod_name" property="prodName" jdbcType="VARCHAR" />
+    <result column="prod_type" property="prodType" jdbcType="VARCHAR" />
+    <result column="prod_batch" property="prodBatch" jdbcType="VARCHAR" />
+    <result column="prod_unit" property="prodUnit" jdbcType="VARCHAR" />
+    <result column="prod_price" property="prodPrice" jdbcType="DOUBLE" />
+    <result column="prod_memo" property="prodMemo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    prod_id, prod_name, prod_type, prod_batch, prod_unit, prod_price, prod_memo
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.bean.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where prod_id = #{prodId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from product
+    where prod_id = #{prodId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.bean.ProductExample" >
+    delete from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.Product" >
+    insert into product (prod_id, prod_name, prod_type, 
+      prod_batch, prod_unit, prod_price, 
+      prod_memo)
+    values (#{prodId,jdbcType=BIGINT}, #{prodName,jdbcType=VARCHAR}, #{prodType,jdbcType=VARCHAR}, 
+      #{prodBatch,jdbcType=VARCHAR}, #{prodUnit,jdbcType=VARCHAR}, #{prodPrice,jdbcType=DOUBLE}, 
+      #{prodMemo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.Product" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prodId != null" >
+        prod_id,
+      </if>
+      <if test="prodName != null" >
+        prod_name,
+      </if>
+      <if test="prodType != null" >
+        prod_type,
+      </if>
+      <if test="prodBatch != null" >
+        prod_batch,
+      </if>
+      <if test="prodUnit != null" >
+        prod_unit,
+      </if>
+      <if test="prodPrice != null" >
+        prod_price,
+      </if>
+      <if test="prodMemo != null" >
+        prod_memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prodId != null" >
+        #{prodId,jdbcType=BIGINT},
+      </if>
+      <if test="prodName != null" >
+        #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="prodType != null" >
+        #{prodType,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBatch != null" >
+        #{prodBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="prodUnit != null" >
+        #{prodUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="prodPrice != null" >
+        #{prodPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="prodMemo != null" >
+        #{prodMemo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.bean.ProductExample" resultType="java.lang.Integer" >
+    select count(*) from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update product
+    <set >
+      <if test="record.prodId != null" >
+        prod_id = #{record.prodId,jdbcType=BIGINT},
+      </if>
+      <if test="record.prodName != null" >
+        prod_name = #{record.prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodType != null" >
+        prod_type = #{record.prodType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodBatch != null" >
+        prod_batch = #{record.prodBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodUnit != null" >
+        prod_unit = #{record.prodUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodPrice != null" >
+        prod_price = #{record.prodPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.prodMemo != null" >
+        prod_memo = #{record.prodMemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update product
+    set prod_id = #{record.prodId,jdbcType=BIGINT},
+      prod_name = #{record.prodName,jdbcType=VARCHAR},
+      prod_type = #{record.prodType,jdbcType=VARCHAR},
+      prod_batch = #{record.prodBatch,jdbcType=VARCHAR},
+      prod_unit = #{record.prodUnit,jdbcType=VARCHAR},
+      prod_price = #{record.prodPrice,jdbcType=DOUBLE},
+      prod_memo = #{record.prodMemo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.Product" >
+    update product
+    <set >
+      <if test="prodName != null" >
+        prod_name = #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="prodType != null" >
+        prod_type = #{prodType,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBatch != null" >
+        prod_batch = #{prodBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="prodUnit != null" >
+        prod_unit = #{prodUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="prodPrice != null" >
+        prod_price = #{prodPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="prodMemo != null" >
+        prod_memo = #{prodMemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where prod_id = #{prodId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.Product" >
+    update product
+    set prod_name = #{prodName,jdbcType=VARCHAR},
+      prod_type = #{prodType,jdbcType=VARCHAR},
+      prod_batch = #{prodBatch,jdbcType=VARCHAR},
+      prod_unit = #{prodUnit,jdbcType=VARCHAR},
+      prod_price = #{prodPrice,jdbcType=DOUBLE},
+      prod_memo = #{prodMemo,jdbcType=VARCHAR}
+    where prod_id = #{prodId,jdbcType=BIGINT}
+  </update>
+  
+   <!-- 分页查询,换成产品的查询条件 prod_name prod_type prod_batch  -->
+   <sql id="prod_where_clause">
+		<where>
+			<if test="entity.prodName != null and entity.prodName != ''">
+				and prod_name like "%${entity.prodName}%"
+			</if>
+			<if test="entity.prodType != null and entity.prodType != ''">
+				and prod_type like "%${entity.prodType}%"
+			</if>
+			<if test="entity.prodBatch != null and entity.prodBatch != ''">
+				and prod_batch like "%${entity.prodBatch}%"
+			</if>
+		</where>
+	</sql>
+	<!-- 分页查询 -->
+	<select id="selectListsByPageInfo" parameterType="com.crm.support.PageInfo"
+		resultMap="BaseResultMap">
+		select * from product 
+		<include refid="prod_where_clause"></include>
+		limit #{start} , #{pageSize}
+	</select>
+	<!-- 检索数量 -->
+	<select id="selectCountByPageInfo" resultType="int" parameterType="com.crm.support.PageInfo">
+		select count(*) from product
+			<include refid="prod_where_clause"></include>
+	</select>
+  
+</mapper>

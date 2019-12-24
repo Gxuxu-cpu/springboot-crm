@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.mapper.StorageMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.Storage" >
+    <id column="stk_id" property="stkId" jdbcType="BIGINT" />
+    <result column="stk_warehouse" property="stkWarehouse" jdbcType="VARCHAR" />
+    <result column="stk_ware" property="stkWare" jdbcType="VARCHAR" />
+    <result column="stk_count" property="stkCount" jdbcType="INTEGER" />
+    <result column="stk_memo" property="stkMemo" jdbcType="VARCHAR" />
+    <result column="stk_prod_id" property="stkProdId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    stk_id, stk_warehouse, stk_ware, stk_count, stk_memo, stk_prod_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.bean.StorageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from storage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from storage
+    where stk_id = #{stkId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from storage
+    where stk_id = #{stkId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.bean.StorageExample" >
+    delete from storage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.Storage" >
+    insert into storage (stk_id, stk_warehouse, stk_ware, 
+      stk_count, stk_memo, stk_prod_id
+      )
+    values (#{stkId,jdbcType=BIGINT}, #{stkWarehouse,jdbcType=VARCHAR}, #{stkWare,jdbcType=VARCHAR}, 
+      #{stkCount,jdbcType=INTEGER}, #{stkMemo,jdbcType=VARCHAR}, #{stkProdId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.Storage" >
+    insert into storage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stkId != null" >
+        stk_id,
+      </if>
+      <if test="stkWarehouse != null" >
+        stk_warehouse,
+      </if>
+      <if test="stkWare != null" >
+        stk_ware,
+      </if>
+      <if test="stkCount != null" >
+        stk_count,
+      </if>
+      <if test="stkMemo != null" >
+        stk_memo,
+      </if>
+      <if test="stkProdId != null" >
+        stk_prod_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stkId != null" >
+        #{stkId,jdbcType=BIGINT},
+      </if>
+      <if test="stkWarehouse != null" >
+        #{stkWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="stkWare != null" >
+        #{stkWare,jdbcType=VARCHAR},
+      </if>
+      <if test="stkCount != null" >
+        #{stkCount,jdbcType=INTEGER},
+      </if>
+      <if test="stkMemo != null" >
+        #{stkMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="stkProdId != null" >
+        #{stkProdId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.bean.StorageExample" resultType="java.lang.Integer" >
+    select count(*) from storage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update storage
+    <set >
+      <if test="record.stkId != null" >
+        stk_id = #{record.stkId,jdbcType=BIGINT},
+      </if>
+      <if test="record.stkWarehouse != null" >
+        stk_warehouse = #{record.stkWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stkWare != null" >
+        stk_ware = #{record.stkWare,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stkCount != null" >
+        stk_count = #{record.stkCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.stkMemo != null" >
+        stk_memo = #{record.stkMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stkProdId != null" >
+        stk_prod_id = #{record.stkProdId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update storage
+    set stk_id = #{record.stkId,jdbcType=BIGINT},
+      stk_warehouse = #{record.stkWarehouse,jdbcType=VARCHAR},
+      stk_ware = #{record.stkWare,jdbcType=VARCHAR},
+      stk_count = #{record.stkCount,jdbcType=INTEGER},
+      stk_memo = #{record.stkMemo,jdbcType=VARCHAR},
+      stk_prod_id = #{record.stkProdId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.Storage" >
+    update storage
+    <set >
+      <if test="stkWarehouse != null" >
+        stk_warehouse = #{stkWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="stkWare != null" >
+        stk_ware = #{stkWare,jdbcType=VARCHAR},
+      </if>
+      <if test="stkCount != null" >
+        stk_count = #{stkCount,jdbcType=INTEGER},
+      </if>
+      <if test="stkMemo != null" >
+        stk_memo = #{stkMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="stkProdId != null" >
+        stk_prod_id = #{stkProdId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where stk_id = #{stkId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.Storage" >
+    update storage
+    set stk_warehouse = #{stkWarehouse,jdbcType=VARCHAR},
+      stk_ware = #{stkWare,jdbcType=VARCHAR},
+      stk_count = #{stkCount,jdbcType=INTEGER},
+      stk_memo = #{stkMemo,jdbcType=VARCHAR},
+      stk_prod_id = #{stkProdId,jdbcType=BIGINT}
+    where stk_id = #{stkId,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 分页查询,换成库存的的查询条件 prod_name prod_type prod_batch  stk_warehouse
+  	海 =>prodName进行传递 =>prod_name prod_type prod_batch均是和prodName进行比较的。
+  
+  -->
+   <sql id="storage_where_clause">
+		<where>
+			<if test="entity.product.prodName != null and entity.product.prodName != ''">
+				and (prod_name LIKE '%${entity.product.prodName}%' OR prod_type LIKE '%${entity.product.prodName}%' OR prod_batch LIKE '%${entity.product.prodName}%') 
+			</if>
+			<if test="entity.stkWarehouse!= null and entity.stkWarehouse!=''">
+				and stk_warehouse like "%${entity.stkWarehouse}%"
+			</if>
+		</where>
+	</sql>
+	<!-- 分页查询 -->
+	<select id="selectListsByPageInfo" parameterType="com.crm.support.PageInfo"
+		resultMap="StorageResultMap">
+		SELECT * FROM product p INNER JOIN `storage` s ON p.`prod_id` = s.`stk_prod_id` 
+		<include refid="storage_where_clause"></include>
+		limit #{start} , #{pageSize}
+	</select>
+	<!-- 检索数量 -->
+	<select id="selectCountByPageInfo" resultType="int" parameterType="com.crm.support.PageInfo">
+		SELECT count(*) FROM product p INNER JOIN `storage` s ON p.`prod_id` = s.`stk_prod_id`
+		<include refid="storage_where_clause"></include>
+	</select>
+  
+	  <resultMap id="StorageResultMap" type="com.crm.bean.Storage" >
+	    <id column="stk_id" property="stkId" jdbcType="BIGINT" />
+	    <result column="stk_warehouse" property="stkWarehouse" jdbcType="VARCHAR" />
+	    <result column="stk_ware" property="stkWare" jdbcType="VARCHAR" />
+	    <result column="stk_count" property="stkCount" jdbcType="INTEGER" />
+	    <result column="stk_memo" property="stkMemo" jdbcType="VARCHAR" />
+	    <result column="stk_prod_id" property="stkProdId" jdbcType="BIGINT" />
+	    <!-- 一个storage对应一个product -->
+	    <association property="product" javaType="com.crm.bean.Product">
+	    	<id column="prod_id" property="prodId" jdbcType="BIGINT" />
+		    <result column="prod_name" property="prodName" jdbcType="VARCHAR" />
+		    <result column="prod_type" property="prodType" jdbcType="VARCHAR" />
+		    <result column="prod_batch" property="prodBatch" jdbcType="VARCHAR" />
+		    <result column="prod_unit" property="prodUnit" jdbcType="VARCHAR" />
+		    <result column="prod_price" property="prodPrice" jdbcType="DOUBLE" />
+		    <result column="prod_memo" property="prodMemo" jdbcType="VARCHAR" />
+	    </association>
+	  </resultMap>
+</mapper>

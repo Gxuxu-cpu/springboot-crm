@@ -1,0 +1,74 @@
+html,body{
+ margin:0;
+ padding:0;
+ font-size:12px;
+ color:#000;
+ text-align:center;
+ font-family:"宋体";
+}
+/*\*/ * html div { height: 1%; } /**/
+div,form,img,ul,ol,li,dl,dt,dd,p {margin: 0; padding: 0; border: 0;}
+ul{
+ list-style-type:none;
+}
+a:link {
+ color: #000;
+ text-decoration: none;
+}
+a:visited {
+ color: #000;
+ text-decoration: none;
+}
+a:hover {
+ color: #f80000;
+ text-decoration: underline;
+}
+a:active {
+ color: #f80000;
+ text-decoration: underline;
+}
+.red,.red a:link,.red a:visited,a.red:link,a.red:visited {
+ color:#ff0000;
+}
+.qqbox{
+	width:132px;
+	height:auto;
+	overflow:hidden;
+	position:absolute;
+	right:-1px;
+	top:153px;
+}
+.qqlv{
+	width:32px;
+	height:256px;
+	overflow:hidden;
+	position:relative;
+	float:right;
+	z-index:50px;
+}
+.qqkf{
+	width:75px;
+	height:auto;
+	overflow:hidden;
+	z-index:99;
+	border:6px solid #138907;
+	background:#fff;
+	margin-top: 236px;
+}
+
+.qqkfhm{
+	color:#0000;
+	width:50px;
+	height:22px;
+	overflow:hidden;
+	line-height:22px;
+	padding-right:8px;
+	position:relative;
+	margin-top: 3px;
+	margin-right: 0;
+	margin-bottom: 3px;
+	margin-left: 0;
+	padding-top: 20px;
+}
+
+.font{font-size:16px; font-family:"隶书", "黑体", "华文新魏";}

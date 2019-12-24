@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.mapper.CstLinkmanMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.CstLinkman" >
+    <id column="lkm_id" property="lkmId" jdbcType="BIGINT" />
+    <result column="lkm_cust_no" property="lkmCustNo" jdbcType="VARCHAR" />
+    <result column="lkm_cust_name" property="lkmCustName" jdbcType="VARCHAR" />
+    <result column="lkm_name" property="lkmName" jdbcType="VARCHAR" />
+    <result column="lkm_sex" property="lkmSex" jdbcType="VARCHAR" />
+    <result column="lkm_postion" property="lkmPostion" jdbcType="VARCHAR" />
+    <result column="lkm_tel" property="lkmTel" jdbcType="VARCHAR" />
+    <result column="lkm_mobile" property="lkmMobile" jdbcType="VARCHAR" />
+    <result column="lkm_memo" property="lkmMemo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    lkm_id, lkm_cust_no, lkm_cust_name, lkm_name, lkm_sex, lkm_postion, lkm_tel, lkm_mobile, 
+    lkm_memo
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.bean.CstLinkmanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cst_linkman
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cst_linkman
+    where lkm_id = #{lkmId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cst_linkman
+    where lkm_id = #{lkmId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.bean.CstLinkmanExample" >
+    delete from cst_linkman
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.CstLinkman" >
+    insert into cst_linkman (lkm_id, lkm_cust_no, lkm_cust_name, 
+      lkm_name, lkm_sex, lkm_postion, 
+      lkm_tel, lkm_mobile, lkm_memo
+      )
+    values (#{lkmId,jdbcType=BIGINT}, #{lkmCustNo,jdbcType=VARCHAR}, #{lkmCustName,jdbcType=VARCHAR}, 
+      #{lkmName,jdbcType=VARCHAR}, #{lkmSex,jdbcType=VARCHAR}, #{lkmPostion,jdbcType=VARCHAR}, 
+      #{lkmTel,jdbcType=VARCHAR}, #{lkmMobile,jdbcType=VARCHAR}, #{lkmMemo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.CstLinkman" >
+    insert into cst_linkman
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lkmId != null" >
+        lkm_id,
+      </if>
+      <if test="lkmCustNo != null" >
+        lkm_cust_no,
+      </if>
+      <if test="lkmCustName != null" >
+        lkm_cust_name,
+      </if>
+      <if test="lkmName != null" >
+        lkm_name,
+      </if>
+      <if test="lkmSex != null" >
+        lkm_sex,
+      </if>
+      <if test="lkmPostion != null" >
+        lkm_postion,
+      </if>
+      <if test="lkmTel != null" >
+        lkm_tel,
+      </if>
+      <if test="lkmMobile != null" >
+        lkm_mobile,
+      </if>
+      <if test="lkmMemo != null" >
+        lkm_memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lkmId != null" >
+        #{lkmId,jdbcType=BIGINT},
+      </if>
+      <if test="lkmCustNo != null" >
+        #{lkmCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmCustName != null" >
+        #{lkmCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmName != null" >
+        #{lkmName,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmSex != null" >
+        #{lkmSex,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmPostion != null" >
+        #{lkmPostion,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmTel != null" >
+        #{lkmTel,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmMobile != null" >
+        #{lkmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmMemo != null" >
+        #{lkmMemo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.bean.CstLinkmanExample" resultType="java.lang.Integer" >
+    select count(*) from cst_linkman
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cst_linkman
+    <set >
+      <if test="record.lkmId != null" >
+        lkm_id = #{record.lkmId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lkmCustNo != null" >
+        lkm_cust_no = #{record.lkmCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmCustName != null" >
+        lkm_cust_name = #{record.lkmCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmName != null" >
+        lkm_name = #{record.lkmName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmSex != null" >
+        lkm_sex = #{record.lkmSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmPostion != null" >
+        lkm_postion = #{record.lkmPostion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmTel != null" >
+        lkm_tel = #{record.lkmTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmMobile != null" >
+        lkm_mobile = #{record.lkmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmMemo != null" >
+        lkm_memo = #{record.lkmMemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cst_linkman
+    set lkm_id = #{record.lkmId,jdbcType=BIGINT},
+      lkm_cust_no = #{record.lkmCustNo,jdbcType=VARCHAR},
+      lkm_cust_name = #{record.lkmCustName,jdbcType=VARCHAR},
+      lkm_name = #{record.lkmName,jdbcType=VARCHAR},
+      lkm_sex = #{record.lkmSex,jdbcType=VARCHAR},
+      lkm_postion = #{record.lkmPostion,jdbcType=VARCHAR},
+      lkm_tel = #{record.lkmTel,jdbcType=VARCHAR},
+      lkm_mobile = #{record.lkmMobile,jdbcType=VARCHAR},
+      lkm_memo = #{record.lkmMemo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.CstLinkman" >
+    update cst_linkman
+    <set >
+      <if test="lkmCustNo != null" >
+        lkm_cust_no = #{lkmCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmCustName != null" >
+        lkm_cust_name = #{lkmCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmName != null" >
+        lkm_name = #{lkmName,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmSex != null" >
+        lkm_sex = #{lkmSex,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmPostion != null" >
+        lkm_postion = #{lkmPostion,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmTel != null" >
+        lkm_tel = #{lkmTel,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmMobile != null" >
+        lkm_mobile = #{lkmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmMemo != null" >
+        lkm_memo = #{lkmMemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lkm_id = #{lkmId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.CstLinkman" >
+    update cst_linkman
+    set lkm_cust_no = #{lkmCustNo,jdbcType=VARCHAR},
+      lkm_cust_name = #{lkmCustName,jdbcType=VARCHAR},
+      lkm_name = #{lkmName,jdbcType=VARCHAR},
+      lkm_sex = #{lkmSex,jdbcType=VARCHAR},
+      lkm_postion = #{lkmPostion,jdbcType=VARCHAR},
+      lkm_tel = #{lkmTel,jdbcType=VARCHAR},
+      lkm_mobile = #{lkmMobile,jdbcType=VARCHAR},
+      lkm_memo = #{lkmMemo,jdbcType=VARCHAR}
+    where lkm_id = #{lkmId,jdbcType=BIGINT}
+  </update>
+</mapper>

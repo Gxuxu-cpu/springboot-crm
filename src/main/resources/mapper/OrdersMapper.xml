@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.Orders" >
+    <id column="odr_id" property="odrId" jdbcType="BIGINT" />
+    <result column="odr_customer" property="odrCustomer" jdbcType="VARCHAR" />
+    <result column="odr_date" property="odrDate" jdbcType="TIMESTAMP" />
+    <result column="odr_addr" property="odrAddr" jdbcType="VARCHAR" />
+    <result column="odr_status" property="odrStatus" jdbcType="VARCHAR" />
+    <result column="odr_cust_no" property="odrCustNo" jdbcType="VARCHAR" />
+    <result column="total" property="total" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    odr_id, odr_customer, odr_date, odr_addr, odr_status, odr_cust_no, total
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.bean.OrdersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where odr_id = #{odrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from orders
+    where odr_id = #{odrId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.bean.OrdersExample" >
+    delete from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.Orders" >
+    insert into orders (odr_id, odr_customer, odr_date, 
+      odr_addr, odr_status, odr_cust_no, 
+      total)
+    values (#{odrId,jdbcType=BIGINT}, #{odrCustomer,jdbcType=VARCHAR}, #{odrDate,jdbcType=TIMESTAMP}, 
+      #{odrAddr,jdbcType=VARCHAR}, #{odrStatus,jdbcType=VARCHAR}, #{odrCustNo,jdbcType=VARCHAR}, 
+      #{total,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="odrId != null" >
+        odr_id,
+      </if>
+      <if test="odrCustomer != null" >
+        odr_customer,
+      </if>
+      <if test="odrDate != null" >
+        odr_date,
+      </if>
+      <if test="odrAddr != null" >
+        odr_addr,
+      </if>
+      <if test="odrStatus != null" >
+        odr_status,
+      </if>
+      <if test="odrCustNo != null" >
+        odr_cust_no,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="odrId != null" >
+        #{odrId,jdbcType=BIGINT},
+      </if>
+      <if test="odrCustomer != null" >
+        #{odrCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="odrDate != null" >
+        #{odrDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="odrAddr != null" >
+        #{odrAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="odrStatus != null" >
+        #{odrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="odrCustNo != null" >
+        #{odrCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.bean.OrdersExample" resultType="java.lang.Integer" >
+    select count(*) from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update orders
+    <set >
+      <if test="record.odrId != null" >
+        odr_id = #{record.odrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.odrCustomer != null" >
+        odr_customer = #{record.odrCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.odrDate != null" >
+        odr_date = #{record.odrDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.odrAddr != null" >
+        odr_addr = #{record.odrAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.odrStatus != null" >
+        odr_status = #{record.odrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.odrCustNo != null" >
+        odr_cust_no = #{record.odrCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.total != null" >
+        total = #{record.total,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update orders
+    set odr_id = #{record.odrId,jdbcType=BIGINT},
+      odr_customer = #{record.odrCustomer,jdbcType=VARCHAR},
+      odr_date = #{record.odrDate,jdbcType=TIMESTAMP},
+      odr_addr = #{record.odrAddr,jdbcType=VARCHAR},
+      odr_status = #{record.odrStatus,jdbcType=VARCHAR},
+      odr_cust_no = #{record.odrCustNo,jdbcType=VARCHAR},
+      total = #{record.total,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.Orders" >
+    update orders
+    <set >
+      <if test="odrCustomer != null" >
+        odr_customer = #{odrCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="odrDate != null" >
+        odr_date = #{odrDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="odrAddr != null" >
+        odr_addr = #{odrAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="odrStatus != null" >
+        odr_status = #{odrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="odrCustNo != null" >
+        odr_cust_no = #{odrCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where odr_id = #{odrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.Orders" >
+    update orders
+    set odr_customer = #{odrCustomer,jdbcType=VARCHAR},
+      odr_date = #{odrDate,jdbcType=TIMESTAMP},
+      odr_addr = #{odrAddr,jdbcType=VARCHAR},
+      odr_status = #{odrStatus,jdbcType=VARCHAR},
+      odr_cust_no = #{odrCustNo,jdbcType=VARCHAR},
+      total = #{total,jdbcType=DOUBLE}
+    where odr_id = #{odrId,jdbcType=BIGINT}
+  </update>
+  
+  
+ 
+    <!-- 添加分页查询的相关statement -->
+  <select id="selectListsByPageInfo" parameterType="com.crm.support.PageInfo" resultMap="BaseResultMap">	 
+     SELECT * FROM `orders`   
+     <where>
+     	<!-- 当chcCustName不为空而且不等于空格的时候起作用 -->
+     	 <if test="entity.odrCustNo!=null and entity.odrCustNo!=''">
+	    	 AND odr_cust_no LIKE '%${entity.odrCustNo}%' 
+	     </if>
+	     <if test="ok!=null and ok!=''">
+	     	 AND odr_date LIKE '%${ok}%'
+	     </if>
+	     <if test="entity.odrId!=null and entity.odrId!=''">
+	     	 AND odr_id LIKE '%${entity.odrId}%' 
+	     </if>
+	  </where>
+  	 LIMIT #{start},#{pageSize}
+  </select>
+  
+  <!-- 查询条数 -->
+  <select id="selectCountByPageInfo" parameterType="com.crm.support.PageInfo" resultType="int">
+  	 SELECT  count(*) FROM  `orders` 
+  	 <where>
+     	<!-- 当chcCustName不为空而且不等于空格的时候起作用 -->
+     	 <if test="entity.odrCustNo!=null and entity.odrCustNo!=''">
+	    	 AND odr_cust_no LIKE '%${entity.odrCustNo}%' 
+	     </if>
+	     <if test="ok!=null and ok!=''">
+	     	 AND odr_date LIKE '%${ok}%'
+	     </if>
+	       <if test="entity.odrId!=null and entity.odrId!=''">
+	     	 AND odr_id LIKE '%${entity.odrId}%' 
+	     </if>
+	  </where>
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+  <!-- 新增findOrdersByOrdId代码块儿 ，传入的是Long型odrId=>订单编号，查询的是订单 -->
+  <select id="findOrdersByOrdId" parameterType="java.lang.Long" resultMap="ordersMap">	 
+      SELECT * FROM orders o 
+	  INNER JOIN orders_line l ON o.odr_id = l.`odd_order_id`
+	  INNER JOIN product p ON  l.odd_prod_id = p.prod_id
+	  WHERE odr_id = #{value}
+  </select>
+  
+  <resultMap id="ordersMap" type="com.crm.bean.Orders" >
+    <id column="odr_id" property="odrId" jdbcType="BIGINT" />
+    <result column="odr_customer" property="odrCustomer" jdbcType="VARCHAR" />
+    <result column="odr_date" property="odrDate" jdbcType="TIMESTAMP" />
+    <result column="odr_addr" property="odrAddr" jdbcType="VARCHAR" />
+    <result column="odr_status" property="odrStatus" jdbcType="VARCHAR" />
+    <result column="odr_cust_no" property="odrCustNo" jdbcType="VARCHAR" />
+    <result column="total" property="total" jdbcType="DOUBLE" />
+    
+    <!-- 一个orders对应多个ordersLine -->
+    <collection property="ordersLineList" ofType="com.crm.bean.OrdersLine">
+    	<!-- ordersLine属性和列的关系建议从ordersLineMapper.xml中复制 -->
+    	<id column="odd_id" property="oddId" jdbcType="BIGINT" />
+	    <result column="odd_order_id" property="oddOrderId" jdbcType="BIGINT" />
+	    <result column="odd_prod_id" property="oddProdId" jdbcType="BIGINT" />
+	    <result column="odd_count" property="oddCount" jdbcType="INTEGER" />
+	    <result column="odd_unit" property="oddUnit" jdbcType="VARCHAR" />
+	    <result column="odd_price" property="oddPrice" jdbcType="DOUBLE" />
+	    
+	    <!-- 配置orderLine和product的关系，一个orderLine对应一个product -->
+	    <association property="product" javaType="com.crm.bean.Product">
+	    	<id column="prod_id" property="prodId" jdbcType="BIGINT" />
+		    <result column="prod_name" property="prodName" jdbcType="VARCHAR" />
+		    <result column="prod_type" property="prodType" jdbcType="VARCHAR" />
+		    <result column="prod_batch" property="prodBatch" jdbcType="VARCHAR" />
+		    <result column="prod_unit" property="prodUnit" jdbcType="VARCHAR" />
+		    <result column="prod_price" property="prodPrice" jdbcType="DOUBLE" />
+		    <result column="prod_memo" property="prodMemo" jdbcType="VARCHAR" />
+	    </association>
+    </collection>
+  </resultMap>
+  
+  
+</mapper>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.mapper.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.SysUser" >
+    <id column="usr_id" property="usrId" jdbcType="BIGINT" />
+    <result column="usr_name" property="usrName" jdbcType="VARCHAR" />
+    <result column="usr_password" property="usrPassword" jdbcType="VARCHAR" />
+    <result column="usr_flag" property="usrFlag" jdbcType="INTEGER" />
+    <result column="usr_role_id" property="usrRoleId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    usr_id, usr_name, usr_password, usr_flag, usr_role_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.bean.SysUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where usr_id = #{usrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_user
+    where usr_id = #{usrId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.bean.SysUserExample" >
+    delete from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.SysUser" >
+    insert into sys_user (usr_id, usr_name, usr_password, 
+      usr_flag, usr_role_id)
+    values (#{usrId,jdbcType=BIGINT}, #{usrName,jdbcType=VARCHAR}, #{usrPassword,jdbcType=VARCHAR}, 
+      #{usrFlag,jdbcType=INTEGER}, #{usrRoleId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.SysUser" >
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usrId != null" >
+        usr_id,
+      </if>
+      <if test="usrName != null" >
+        usr_name,
+      </if>
+      <if test="usrPassword != null" >
+        usr_password,
+      </if>
+      <if test="usrFlag != null" >
+        usr_flag,
+      </if>
+      <if test="usrRoleId != null" >
+        usr_role_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usrId != null" >
+        #{usrId,jdbcType=BIGINT},
+      </if>
+      <if test="usrName != null" >
+        #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="usrPassword != null" >
+        #{usrPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usrFlag != null" >
+        #{usrFlag,jdbcType=INTEGER},
+      </if>
+      <if test="usrRoleId != null" >
+        #{usrRoleId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.bean.SysUserExample" resultType="java.lang.Integer" >
+    select count(*) from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_user
+    <set >
+      <if test="record.usrId != null" >
+        usr_id = #{record.usrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.usrName != null" >
+        usr_name = #{record.usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrPassword != null" >
+        usr_password = #{record.usrPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrFlag != null" >
+        usr_flag = #{record.usrFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.usrRoleId != null" >
+        usr_role_id = #{record.usrRoleId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_user
+    set usr_id = #{record.usrId,jdbcType=BIGINT},
+      usr_name = #{record.usrName,jdbcType=VARCHAR},
+      usr_password = #{record.usrPassword,jdbcType=VARCHAR},
+      usr_flag = #{record.usrFlag,jdbcType=INTEGER},
+      usr_role_id = #{record.usrRoleId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SysUser" >
+    update sys_user
+    <set >
+      <if test="usrName != null" >
+        usr_name = #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="usrPassword != null" >
+        usr_password = #{usrPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usrFlag != null" >
+        usr_flag = #{usrFlag,jdbcType=INTEGER},
+      </if>
+      <if test="usrRoleId != null" >
+        usr_role_id = #{usrRoleId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where usr_id = #{usrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SysUser" >
+    update sys_user
+    set usr_name = #{usrName,jdbcType=VARCHAR},
+      usr_password = #{usrPassword,jdbcType=VARCHAR},
+      usr_flag = #{usrFlag,jdbcType=INTEGER},
+      usr_role_id = #{usrRoleId,jdbcType=BIGINT}
+    where usr_id = #{usrId,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 根据用户名和密码进行查询,传出值是SysUser,传入值也是SysUser-->
+  <select id="selectUser" parameterType="com.crm.bean.SysUser" resultMap="BaseResultMap">
+  	 SELECT * FROM `sys_user` WHERE usr_name = #{usrName} AND usr_password = #{usrPassword}
+  </select>
+  
+  <!-- 添加权限列表的查询,根据用户查询权限  resultType="SysRight"-->
+  <select id="selectUserRights" parameterType="com.crm.bean.SysUser" resultMap="rightResultMap">
+  	SELECT t.* FROM sys_user u 
+	LEFT JOIN sys_role r ON u.usr_role_id = r.`role_id`
+	LEFT JOIN sys_role_right rr ON r.role_id = rr.rf_role_id
+	LEFT JOIN sys_right t ON rr.rf_right_code = t.right_code
+	WHERE usr_id = #{usrId}
+  </select>
+  
+
+  <!-- 因为列和类的属性不匹配，所有就需要定义个resultMap 
+       根据用户查权限
+       用户是SysUser   权限是SysRight
+       表的列表叫right_code   SysRight类的属性叫rightCode
+  -->
+  <resultMap id="rightResultMap" type="com.crm.bean.SysRight" >
+    <id column="right_code" property="rightCode" jdbcType="VARCHAR" />
+    <result column="right_parent_code" property="rightParentCode" jdbcType="VARCHAR" />
+    <result column="right_type" property="rightType" jdbcType="VARCHAR" />
+    <result column="right_text" property="rightText" jdbcType="VARCHAR" />
+    <result column="right_url" property="rightUrl" jdbcType="VARCHAR" />
+    <result column="right_tip" property="rightTip" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <!-- 联表查询用户角色 -->
+  <select id="findAllUsers" parameterType="com.crm.bean.SysUser" resultMap="userRoleMap">
+  	SELECT * FROM `sys_user` u LEFT JOIN `sys_role` r ON u.`usr_role_id` = r.`role_id`
+  </select>
+
+  <!-- 配置一对一的关系 -->	
+ <resultMap id="userRoleMap" type="com.crm.bean.SysUser" >
+    <id column="usr_id" property="usrId" jdbcType="BIGINT" />
+    <result column="usr_name" property="usrName" jdbcType="VARCHAR" />
+    <result column="usr_password" property="usrPassword" jdbcType="VARCHAR" />
+    <result column="usr_flag" property="usrFlag" jdbcType="INTEGER" />
+    <result column="usr_role_id" property="usrRoleId" jdbcType="BIGINT" />
+    <association property="sysRole" javaType="com.crm.bean.SysRole">
+    	<id column="role_id" property="roleId" jdbcType="BIGINT" />
+	    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+	    <result column="role_desc" property="roleDesc" jdbcType="VARCHAR" />
+	    <result column="role_flag" property="roleFlag" jdbcType="INTEGER" />
+    </association>
+  </resultMap>
+</mapper>

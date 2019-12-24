@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.mapper.SysRightMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.SysRight" >
+    <id column="right_code" property="rightCode" jdbcType="VARCHAR" />
+    <result column="right_parent_code" property="rightParentCode" jdbcType="VARCHAR" />
+    <result column="right_type" property="rightType" jdbcType="VARCHAR" />
+    <result column="right_text" property="rightText" jdbcType="VARCHAR" />
+    <result column="right_url" property="rightUrl" jdbcType="VARCHAR" />
+    <result column="right_tip" property="rightTip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    right_code, right_parent_code, right_type, right_text, right_url, right_tip
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.bean.SysRightExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_right
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_right
+    where right_code = #{rightCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_right
+    where right_code = #{rightCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.bean.SysRightExample" >
+    delete from sys_right
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.SysRight" >
+    insert into sys_right (right_code, right_parent_code, right_type, 
+      right_text, right_url, right_tip
+      )
+    values (#{rightCode,jdbcType=VARCHAR}, #{rightParentCode,jdbcType=VARCHAR}, #{rightType,jdbcType=VARCHAR}, 
+      #{rightText,jdbcType=VARCHAR}, #{rightUrl,jdbcType=VARCHAR}, #{rightTip,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.SysRight" >
+    insert into sys_right
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rightCode != null" >
+        right_code,
+      </if>
+      <if test="rightParentCode != null" >
+        right_parent_code,
+      </if>
+      <if test="rightType != null" >
+        right_type,
+      </if>
+      <if test="rightText != null" >
+        right_text,
+      </if>
+      <if test="rightUrl != null" >
+        right_url,
+      </if>
+      <if test="rightTip != null" >
+        right_tip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rightCode != null" >
+        #{rightCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rightParentCode != null" >
+        #{rightParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rightType != null" >
+        #{rightType,jdbcType=VARCHAR},
+      </if>
+      <if test="rightText != null" >
+        #{rightText,jdbcType=VARCHAR},
+      </if>
+      <if test="rightUrl != null" >
+        #{rightUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="rightTip != null" >
+        #{rightTip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.bean.SysRightExample" resultType="java.lang.Integer" >
+    select count(*) from sys_right
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_right
+    <set >
+      <if test="record.rightCode != null" >
+        right_code = #{record.rightCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightParentCode != null" >
+        right_parent_code = #{record.rightParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightType != null" >
+        right_type = #{record.rightType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightText != null" >
+        right_text = #{record.rightText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightUrl != null" >
+        right_url = #{record.rightUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightTip != null" >
+        right_tip = #{record.rightTip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_right
+    set right_code = #{record.rightCode,jdbcType=VARCHAR},
+      right_parent_code = #{record.rightParentCode,jdbcType=VARCHAR},
+      right_type = #{record.rightType,jdbcType=VARCHAR},
+      right_text = #{record.rightText,jdbcType=VARCHAR},
+      right_url = #{record.rightUrl,jdbcType=VARCHAR},
+      right_tip = #{record.rightTip,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SysRight" >
+    update sys_right
+    <set >
+      <if test="rightParentCode != null" >
+        right_parent_code = #{rightParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rightType != null" >
+        right_type = #{rightType,jdbcType=VARCHAR},
+      </if>
+      <if test="rightText != null" >
+        right_text = #{rightText,jdbcType=VARCHAR},
+      </if>
+      <if test="rightUrl != null" >
+        right_url = #{rightUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="rightTip != null" >
+        right_tip = #{rightTip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where right_code = #{rightCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SysRight" >
+    update sys_right
+    set right_parent_code = #{rightParentCode,jdbcType=VARCHAR},
+      right_type = #{rightType,jdbcType=VARCHAR},
+      right_text = #{rightText,jdbcType=VARCHAR},
+      right_url = #{rightUrl,jdbcType=VARCHAR},
+      right_tip = #{rightTip,jdbcType=VARCHAR}
+    where right_code = #{rightCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

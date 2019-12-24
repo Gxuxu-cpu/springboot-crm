@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.mapper.SalPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.SalPlan" >
+    <id column="pla_id" property="plaId" jdbcType="BIGINT" />
+    <result column="pla_date" property="plaDate" jdbcType="TIMESTAMP" />
+    <result column="pla_todo" property="plaTodo" jdbcType="VARCHAR" />
+    <result column="pla_result" property="plaResult" jdbcType="VARCHAR" />
+    <result column="pla_chc_id" property="plaChcId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pla_id, pla_date, pla_todo, pla_result, pla_chc_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.bean.SalPlanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sal_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sal_plan
+    where pla_id = #{plaId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sal_plan
+    where pla_id = #{plaId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.bean.SalPlanExample" >
+    delete from sal_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.SalPlan" >
+    insert into sal_plan (pla_id, pla_date, pla_todo, 
+      pla_result, pla_chc_id)
+    values (#{plaId,jdbcType=BIGINT}, #{plaDate,jdbcType=TIMESTAMP}, #{plaTodo,jdbcType=VARCHAR}, 
+      #{plaResult,jdbcType=VARCHAR}, #{plaChcId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.SalPlan" >
+    insert into sal_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="plaId != null" >
+        pla_id,
+      </if>
+      <if test="plaDate != null" >
+        pla_date,
+      </if>
+      <if test="plaTodo != null" >
+        pla_todo,
+      </if>
+      <if test="plaResult != null" >
+        pla_result,
+      </if>
+      <if test="plaChcId != null" >
+        pla_chc_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="plaId != null" >
+        #{plaId,jdbcType=BIGINT},
+      </if>
+      <if test="plaDate != null" >
+        #{plaDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="plaTodo != null" >
+        #{plaTodo,jdbcType=VARCHAR},
+      </if>
+      <if test="plaResult != null" >
+        #{plaResult,jdbcType=VARCHAR},
+      </if>
+      <if test="plaChcId != null" >
+        #{plaChcId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.bean.SalPlanExample" resultType="java.lang.Integer" >
+    select count(*) from sal_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sal_plan
+    <set >
+      <if test="record.plaId != null" >
+        pla_id = #{record.plaId,jdbcType=BIGINT},
+      </if>
+      <if test="record.plaDate != null" >
+        pla_date = #{record.plaDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.plaTodo != null" >
+        pla_todo = #{record.plaTodo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plaResult != null" >
+        pla_result = #{record.plaResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plaChcId != null" >
+        pla_chc_id = #{record.plaChcId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sal_plan
+    set pla_id = #{record.plaId,jdbcType=BIGINT},
+      pla_date = #{record.plaDate,jdbcType=TIMESTAMP},
+      pla_todo = #{record.plaTodo,jdbcType=VARCHAR},
+      pla_result = #{record.plaResult,jdbcType=VARCHAR},
+      pla_chc_id = #{record.plaChcId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.SalPlan" >
+    update sal_plan
+    <set >
+      <if test="plaDate != null" >
+        pla_date = #{plaDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="plaTodo != null" >
+        pla_todo = #{plaTodo,jdbcType=VARCHAR},
+      </if>
+      <if test="plaResult != null" >
+        pla_result = #{plaResult,jdbcType=VARCHAR},
+      </if>
+      <if test="plaChcId != null" >
+        pla_chc_id = #{plaChcId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where pla_id = #{plaId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.SalPlan" >
+    update sal_plan
+    set pla_date = #{plaDate,jdbcType=TIMESTAMP},
+      pla_todo = #{plaTodo,jdbcType=VARCHAR},
+      pla_result = #{plaResult,jdbcType=VARCHAR},
+      pla_chc_id = #{plaChcId,jdbcType=BIGINT}
+    where pla_id = #{plaId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.mapper.BasDictMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.BasDict" >
+    <id column="dict_id" property="dictId" jdbcType="BIGINT" />
+    <result column="dict_type" property="dictType" jdbcType="VARCHAR" />
+    <result column="dict_item" property="dictItem" jdbcType="VARCHAR" />
+    <result column="dict_value" property="dictValue" jdbcType="VARCHAR" />
+    <result column="dict_is_editable" property="dictIsEditable" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dict_id, dict_type, dict_item, dict_value, dict_is_editable
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.bean.BasDictExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bas_dict
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_dict
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bas_dict
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.bean.BasDictExample" >
+    delete from bas_dict
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.BasDict" >
+    insert into bas_dict (dict_id, dict_type, dict_item, 
+      dict_value, dict_is_editable)
+    values (#{dictId,jdbcType=BIGINT}, #{dictType,jdbcType=VARCHAR}, #{dictItem,jdbcType=VARCHAR}, 
+      #{dictValue,jdbcType=VARCHAR}, #{dictIsEditable,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.BasDict" >
+    insert into bas_dict
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictId != null" >
+        dict_id,
+      </if>
+      <if test="dictType != null" >
+        dict_type,
+      </if>
+      <if test="dictItem != null" >
+        dict_item,
+      </if>
+      <if test="dictValue != null" >
+        dict_value,
+      </if>
+      <if test="dictIsEditable != null" >
+        dict_is_editable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictId != null" >
+        #{dictId,jdbcType=BIGINT},
+      </if>
+      <if test="dictType != null" >
+        #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictItem != null" >
+        #{dictItem,jdbcType=VARCHAR},
+      </if>
+      <if test="dictValue != null" >
+        #{dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictIsEditable != null" >
+        #{dictIsEditable,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.bean.BasDictExample" resultType="java.lang.Integer" >
+    select count(*) from bas_dict
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bas_dict
+    <set >
+      <if test="record.dictId != null" >
+        dict_id = #{record.dictId,jdbcType=BIGINT},
+      </if>
+      <if test="record.dictType != null" >
+        dict_type = #{record.dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictItem != null" >
+        dict_item = #{record.dictItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictValue != null" >
+        dict_value = #{record.dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictIsEditable != null" >
+        dict_is_editable = #{record.dictIsEditable,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bas_dict
+    set dict_id = #{record.dictId,jdbcType=BIGINT},
+      dict_type = #{record.dictType,jdbcType=VARCHAR},
+      dict_item = #{record.dictItem,jdbcType=VARCHAR},
+      dict_value = #{record.dictValue,jdbcType=VARCHAR},
+      dict_is_editable = #{record.dictIsEditable,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.BasDict" >
+    update bas_dict
+    <set >
+      <if test="dictType != null" >
+        dict_type = #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictItem != null" >
+        dict_item = #{dictItem,jdbcType=VARCHAR},
+      </if>
+      <if test="dictValue != null" >
+        dict_value = #{dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictIsEditable != null" >
+        dict_is_editable = #{dictIsEditable,jdbcType=TINYINT},
+      </if>
+    </set>
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.BasDict" >
+    update bas_dict
+    set dict_type = #{dictType,jdbcType=VARCHAR},
+      dict_item = #{dictItem,jdbcType=VARCHAR},
+      dict_value = #{dictValue,jdbcType=VARCHAR},
+      dict_is_editable = #{dictIsEditable,jdbcType=TINYINT}
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </update>
+  
+  
+  <!-- sql标签可以把通用语句块提取出来 -->
+  <sql id="customer_where_clause">
+  	<where>
+     	<!-- 客户经理  cust_manager_name  custManagerName
+			客户编号  cust_no	             custNo;
+			名称	  cust_name             custName;
+			地区      cust_region        custRegion
+			客户等级  cust_level_label custLevelLabel
+		 -->
+     	 <if test="entity.custManagerName!=null and entity.custManagerName!=''">
+	    	 AND cust_manager_name LIKE '%${entity.custManagerName}%' 
+	     </if>
+	     <if test="entity.custNo!=null and entity.custNo!=''">
+	     	 AND cust_no LIKE '%${entity.custNo}%' 
+	     </if>
+	     <if test="entity.custName!=null and entity.custName!=''">
+	     	 AND cust_name LIKE '%${entity.custName}%'
+	     </if>
+	     <!-- 下拉菜单不能使用模糊查询，应该完全匹配查询 -->
+	     <if test="entity.custRegion!=null and entity.custRegion!=''">
+	     	 AND cust_region = #{entity.custRegion}
+	     </if>
+	     <if test="entity.custLevelLabel!=null and entity.custLevelLabel!=''">
+	     	 AND cust_level_label = #{entity.custLevelLabel}
+	     </if>
+  	 </where>
+  </sql>
+  
+  <!-- 分页查询  -->
+   <sql id="dict_where_clause">
+		<where>
+			<if test="entity.dictType != null and entity.dictType != ''">
+				and dict_type like "%${entity.dictType}%"
+			</if>
+			<if test="entity.dictItem != null and entity.dictItem != ''">
+				and dict_item like "%${entity.dictItem}%"
+			</if>
+			<if test="entity.dictValue != null and entity.dictValue != ''">
+				and dict_value = #{entity.dictValue}
+			</if>
+		</where>
+	</sql>
+	<!-- 分页查询 -->
+	<select id="selectListsByPageInfo" parameterType="com.crm.support.PageInfo"
+		resultMap="BaseResultMap">
+		select * from bas_dict 
+		<include refid="dict_where_clause"></include>
+		limit #{start} , #{pageSize}
+	</select>
+	<!-- 检索数量 -->
+	<select id="selectCountByPageInfo" resultType="int" parameterType="com.crm.support.PageInfo">
+		select count(*) from bas_dict
+			<include refid="dict_where_clause"></include>
+	</select>
+	
+	<select id="selectDistinctType" parameterType="java.lang.String" resultType="string">
+		select DISTINCT(dict_type) from bas_dict 
+		<where>
+			<if test="value!= null and value!= ''">
+				and dict_type like "%${value}%"
+			</if>
+		</where>
+		
+	</select>
+  
+</mapper>

@@ -1,0 +1,63 @@
+body {margin:0px auto; font-size:12px; padding:0px; background:#FFFFFF;}
+
+* {border:0;padding:0; margin:0;}
+
+ul {list-style:none; margin:0; padding:0;}
+
+ul li {float:left; list-style:none; margin:0;padding:0;}
+
+p {padding:0px; margin:0px; list-style:none;}
+
+a {text-decoration:none;color:#2457a4}
+a:hover {text-decoration:none;color:#2457a4}
+a£ºvisited {text-decoration:none;color:#2457a4}
+
+#zxw_warp {width:543px; height:453px; margin:110px auto 0px auto; padding:0px;  no-repeat;}
+
+.zxw_bt {width:543px; height:40px; margin:50px auto 0px auto; padding:0px; color:#052d50;}
+
+.zxw_bt_s {width:500px; float:right; font-size:13px; margin:0px auto; padding:0px;}
+
+.zxw_bt_x {width:500px; float:right; font-size:12px; margin:3px auto 0px auto; padding:0px;}
+
+.zxw_st {width:535px; height:11px; text-align:center;}
+.zxw_st img { padding-left:4px;}
+
+.zxw_zt {width:480px; height:232px; margin:10px auto 10px auto; padding:0px; background:url(../images/9zxw_ztbj.jpg) no-repeat;}
+.logo {width:135px; height:50px; margin:25px auto 0px 33px; padding:0px;}
+
+.zxw_sx {width:535px; height:11px; background:url(../images/9zxw_x.gif) no-repeat; margin:0px auto 0px 4px; padding:0px;}
+
+.zxw_wz {width:80px; height:11px; line-height:11px; font-size:11px; margin:0px auto; padding:0px; float:right; color:#052d50;}
+.zxw_wz a {text-decoration:none;color:#052d50}
+.zxw_wz a:hover {text-decoration:none;color:#052d50}
+.zxw_wz a£ºvisited {text-decoration:none;color:#052d50}
+
+.zxw_ba {color:#71afe2; font-size:11px; margin:20px auto 0px auto; padding:0px; width:235px; float:right;}
+.zxw_ba a {text-decoration:none;color:#71afe2}
+.zxw_ba a:hover {text-decoration:none;color:#71afe2}
+.zxw_ba a£ºvisited {text-decoration:none;color:#71afe2}
+
+.txt {width:220px;
+	padding-top:10px;
+	font-size:12px;
+	height:130px;
+	color:#052d50;
+	margin-left:33px;
+	line-height:20px;
+	}
+.txt_yhm {width:220px; height:20px; float:left; margin:0px auto 3px auto; padding:0px;}
+.txt_mm {width:220px; height:20px; float:left; margin:0px auto 0px auto; padding:0px;}
+.txt_rzm {width:220px; height:20px; float:left; margin:3px auto 0px auto; padding:0px;}
+.txt_yzm {width:220px; height:20px; float:left; margin:3px auto 0px auto; padding:0px;}
+.txt_al {width:220px; height:24px; float:left; margin:5px auto 0px auto; padding:0px;}
+.al_dl {width:73px; height:24px; float:left; margin:0px 5px auto 6px; padding:0px;}
+.al_zc {width:73px; height:24px; float:left; margin:0px auto; padding:0px;}
+h2 {
+	font-size:12px;
+	font-weight:normal;
+	color:#052d50;
+	margin-bottom:5px;
+}
+
+

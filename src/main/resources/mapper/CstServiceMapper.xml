@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.mapper.CstServiceMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.bean.CstService" >
+    <id column="svr_id" property="svrId" jdbcType="BIGINT" />
+    <result column="svr_type" property="svrType" jdbcType="VARCHAR" />
+    <result column="svr_title" property="svrTitle" jdbcType="VARCHAR" />
+    <result column="svr_cust_no" property="svrCustNo" jdbcType="VARCHAR" />
+    <result column="svr_cust_name" property="svrCustName" jdbcType="VARCHAR" />
+    <result column="svr_status" property="svrStatus" jdbcType="VARCHAR" />
+    <result column="svr_request" property="svrRequest" jdbcType="VARCHAR" />
+    <result column="svr_create_id" property="svrCreateId" jdbcType="BIGINT" />
+    <result column="svr_create_by" property="svrCreateBy" jdbcType="VARCHAR" />
+    <result column="svr_create_date" property="svrCreateDate" jdbcType="TIMESTAMP" />
+    <result column="svr_due_id" property="svrDueId" jdbcType="BIGINT" />
+    <result column="svr_due_to" property="svrDueTo" jdbcType="VARCHAR" />
+    <result column="svr_due_date" property="svrDueDate" jdbcType="TIMESTAMP" />
+    <result column="svr_deal" property="svrDeal" jdbcType="VARCHAR" />
+    <result column="svr_deal_id" property="svrDealId" jdbcType="BIGINT" />
+    <result column="svr_deal_by" property="svrDealBy" jdbcType="VARCHAR" />
+    <result column="svr_deal_date" property="svrDealDate" jdbcType="TIMESTAMP" />
+    <result column="svr_result" property="svrResult" jdbcType="VARCHAR" />
+    <result column="svr_satisfy" property="svrSatisfy" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    svr_id, svr_type, svr_title, svr_cust_no, svr_cust_name, svr_status, svr_request, 
+    svr_create_id, svr_create_by, svr_create_date, svr_due_id, svr_due_to, svr_due_date, 
+    svr_deal, svr_deal_id, svr_deal_by, svr_deal_date, svr_result, svr_satisfy
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.bean.CstServiceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cst_service
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cst_service
+    where svr_id = #{svrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cst_service
+    where svr_id = #{svrId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.bean.CstServiceExample" >
+    delete from cst_service
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.bean.CstService" >
+    insert into cst_service (svr_id, svr_type, svr_title, 
+      svr_cust_no, svr_cust_name, svr_status, 
+      svr_request, svr_create_id, svr_create_by, 
+      svr_create_date, svr_due_id, svr_due_to, 
+      svr_due_date, svr_deal, svr_deal_id, 
+      svr_deal_by, svr_deal_date, svr_result, 
+      svr_satisfy)
+    values (#{svrId,jdbcType=BIGINT}, #{svrType,jdbcType=VARCHAR}, #{svrTitle,jdbcType=VARCHAR}, 
+      #{svrCustNo,jdbcType=VARCHAR}, #{svrCustName,jdbcType=VARCHAR}, #{svrStatus,jdbcType=VARCHAR}, 
+      #{svrRequest,jdbcType=VARCHAR}, #{svrCreateId,jdbcType=BIGINT}, #{svrCreateBy,jdbcType=VARCHAR}, 
+      #{svrCreateDate,jdbcType=TIMESTAMP}, #{svrDueId,jdbcType=BIGINT}, #{svrDueTo,jdbcType=VARCHAR}, 
+      #{svrDueDate,jdbcType=TIMESTAMP}, #{svrDeal,jdbcType=VARCHAR}, #{svrDealId,jdbcType=BIGINT}, 
+      #{svrDealBy,jdbcType=VARCHAR}, #{svrDealDate,jdbcType=TIMESTAMP}, #{svrResult,jdbcType=VARCHAR}, 
+      #{svrSatisfy,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.bean.CstService" >
+    insert into cst_service
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="svrId != null" >
+        svr_id,
+      </if>
+      <if test="svrType != null" >
+        svr_type,
+      </if>
+      <if test="svrTitle != null" >
+        svr_title,
+      </if>
+      <if test="svrCustNo != null" >
+        svr_cust_no,
+      </if>
+      <if test="svrCustName != null" >
+        svr_cust_name,
+      </if>
+      <if test="svrStatus != null" >
+        svr_status,
+      </if>
+      <if test="svrRequest != null" >
+        svr_request,
+      </if>
+      <if test="svrCreateId != null" >
+        svr_create_id,
+      </if>
+      <if test="svrCreateBy != null" >
+        svr_create_by,
+      </if>
+      <if test="svrCreateDate != null" >
+        svr_create_date,
+      </if>
+      <if test="svrDueId != null" >
+        svr_due_id,
+      </if>
+      <if test="svrDueTo != null" >
+        svr_due_to,
+      </if>
+      <if test="svrDueDate != null" >
+        svr_due_date,
+      </if>
+      <if test="svrDeal != null" >
+        svr_deal,
+      </if>
+      <if test="svrDealId != null" >
+        svr_deal_id,
+      </if>
+      <if test="svrDealBy != null" >
+        svr_deal_by,
+      </if>
+      <if test="svrDealDate != null" >
+        svr_deal_date,
+      </if>
+      <if test="svrResult != null" >
+        svr_result,
+      </if>
+      <if test="svrSatisfy != null" >
+        svr_satisfy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="svrId != null" >
+        #{svrId,jdbcType=BIGINT},
+      </if>
+      <if test="svrType != null" >
+        #{svrType,jdbcType=VARCHAR},
+      </if>
+      <if test="svrTitle != null" >
+        #{svrTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="svrCustNo != null" >
+        #{svrCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="svrCustName != null" >
+        #{svrCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="svrStatus != null" >
+        #{svrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="svrRequest != null" >
+        #{svrRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="svrCreateId != null" >
+        #{svrCreateId,jdbcType=BIGINT},
+      </if>
+      <if test="svrCreateBy != null" >
+        #{svrCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="svrCreateDate != null" >
+        #{svrCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="svrDueId != null" >
+        #{svrDueId,jdbcType=BIGINT},
+      </if>
+      <if test="svrDueTo != null" >
+        #{svrDueTo,jdbcType=VARCHAR},
+      </if>
+      <if test="svrDueDate != null" >
+        #{svrDueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="svrDeal != null" >
+        #{svrDeal,jdbcType=VARCHAR},
+      </if>
+      <if test="svrDealId != null" >
+        #{svrDealId,jdbcType=BIGINT},
+      </if>
+      <if test="svrDealBy != null" >
+        #{svrDealBy,jdbcType=VARCHAR},
+      </if>
+      <if test="svrDealDate != null" >
+        #{svrDealDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="svrResult != null" >
+        #{svrResult,jdbcType=VARCHAR},
+      </if>
+      <if test="svrSatisfy != null" >
+        #{svrSatisfy,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.bean.CstServiceExample" resultType="java.lang.Integer" >
+    select count(*) from cst_service
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cst_service
+    <set >
+      <if test="record.svrId != null" >
+        svr_id = #{record.svrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.svrType != null" >
+        svr_type = #{record.svrType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svrTitle != null" >
+        svr_title = #{record.svrTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svrCustNo != null" >
+        svr_cust_no = #{record.svrCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svrCustName != null" >
+        svr_cust_name = #{record.svrCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svrStatus != null" >
+        svr_status = #{record.svrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svrRequest != null" >
+        svr_request = #{record.svrRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svrCreateId != null" >
+        svr_create_id = #{record.svrCreateId,jdbcType=BIGINT},
+      </if>
+      <if test="record.svrCreateBy != null" >
+        svr_create_by = #{record.svrCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svrCreateDate != null" >
+        svr_create_date = #{record.svrCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.svrDueId != null" >
+        svr_due_id = #{record.svrDueId,jdbcType=BIGINT},
+      </if>
+      <if test="record.svrDueTo != null" >
+        svr_due_to = #{record.svrDueTo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svrDueDate != null" >
+        svr_due_date = #{record.svrDueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.svrDeal != null" >
+        svr_deal = #{record.svrDeal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svrDealId != null" >
+        svr_deal_id = #{record.svrDealId,jdbcType=BIGINT},
+      </if>
+      <if test="record.svrDealBy != null" >
+        svr_deal_by = #{record.svrDealBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svrDealDate != null" >
+        svr_deal_date = #{record.svrDealDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.svrResult != null" >
+        svr_result = #{record.svrResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svrSatisfy != null" >
+        svr_satisfy = #{record.svrSatisfy,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cst_service
+    set svr_id = #{record.svrId,jdbcType=BIGINT},
+      svr_type = #{record.svrType,jdbcType=VARCHAR},
+      svr_title = #{record.svrTitle,jdbcType=VARCHAR},
+      svr_cust_no = #{record.svrCustNo,jdbcType=VARCHAR},
+      svr_cust_name = #{record.svrCustName,jdbcType=VARCHAR},
+      svr_status = #{record.svrStatus,jdbcType=VARCHAR},
+      svr_request = #{record.svrRequest,jdbcType=VARCHAR},
+      svr_create_id = #{record.svrCreateId,jdbcType=BIGINT},
+      svr_create_by = #{record.svrCreateBy,jdbcType=VARCHAR},
+      svr_create_date = #{record.svrCreateDate,jdbcType=TIMESTAMP},
+      svr_due_id = #{record.svrDueId,jdbcType=BIGINT},
+      svr_due_to = #{record.svrDueTo,jdbcType=VARCHAR},
+      svr_due_date = #{record.svrDueDate,jdbcType=TIMESTAMP},
+      svr_deal = #{record.svrDeal,jdbcType=VARCHAR},
+      svr_deal_id = #{record.svrDealId,jdbcType=BIGINT},
+      svr_deal_by = #{record.svrDealBy,jdbcType=VARCHAR},
+      svr_deal_date = #{record.svrDealDate,jdbcType=TIMESTAMP},
+      svr_result = #{record.svrResult,jdbcType=VARCHAR},
+      svr_satisfy = #{record.svrSatisfy,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.bean.CstService" >
+    update cst_service
+    <set >
+      <if test="svrType != null" >
+        svr_type = #{svrType,jdbcType=VARCHAR},
+      </if>
+      <if test="svrTitle != null" >
+        svr_title = #{svrTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="svrCustNo != null" >
+        svr_cust_no = #{svrCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="svrCustName != null" >
+        svr_cust_name = #{svrCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="svrStatus != null" >
+        svr_status = #{svrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="svrRequest != null" >
+        svr_request = #{svrRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="svrCreateId != null" >
+        svr_create_id = #{svrCreateId,jdbcType=BIGINT},
+      </if>
+      <if test="svrCreateBy != null" >
+        svr_create_by = #{svrCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="svrCreateDate != null" >
+        svr_create_date = #{svrCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="svrDueId != null" >
+        svr_due_id = #{svrDueId,jdbcType=BIGINT},
+      </if>
+      <if test="svrDueTo != null" >
+        svr_due_to = #{svrDueTo,jdbcType=VARCHAR},
+      </if>
+      <if test="svrDueDate != null" >
+        svr_due_date = #{svrDueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="svrDeal != null" >
+        svr_deal = #{svrDeal,jdbcType=VARCHAR},
+      </if>
+      <if test="svrDealId != null" >
+        svr_deal_id = #{svrDealId,jdbcType=BIGINT},
+      </if>
+      <if test="svrDealBy != null" >
+        svr_deal_by = #{svrDealBy,jdbcType=VARCHAR},
+      </if>
+      <if test="svrDealDate != null" >
+        svr_deal_date = #{svrDealDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="svrResult != null" >
+        svr_result = #{svrResult,jdbcType=VARCHAR},
+      </if>
+      <if test="svrSatisfy != null" >
+        svr_satisfy = #{svrSatisfy,jdbcType=INTEGER},
+      </if>
+    </set>
+    where svr_id = #{svrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.bean.CstService" >
+    update cst_service
+    set svr_type = #{svrType,jdbcType=VARCHAR},
+      svr_title = #{svrTitle,jdbcType=VARCHAR},
+      svr_cust_no = #{svrCustNo,jdbcType=VARCHAR},
+      svr_cust_name = #{svrCustName,jdbcType=VARCHAR},
+      svr_status = #{svrStatus,jdbcType=VARCHAR},
+      svr_request = #{svrRequest,jdbcType=VARCHAR},
+      svr_create_id = #{svrCreateId,jdbcType=BIGINT},
+      svr_create_by = #{svrCreateBy,jdbcType=VARCHAR},
+      svr_create_date = #{svrCreateDate,jdbcType=TIMESTAMP},
+      svr_due_id = #{svrDueId,jdbcType=BIGINT},
+      svr_due_to = #{svrDueTo,jdbcType=VARCHAR},
+      svr_due_date = #{svrDueDate,jdbcType=TIMESTAMP},
+      svr_deal = #{svrDeal,jdbcType=VARCHAR},
+      svr_deal_id = #{svrDealId,jdbcType=BIGINT},
+      svr_deal_by = #{svrDealBy,jdbcType=VARCHAR},
+      svr_deal_date = #{svrDealDate,jdbcType=TIMESTAMP},
+      svr_result = #{svrResult,jdbcType=VARCHAR},
+      svr_satisfy = #{svrSatisfy,jdbcType=INTEGER}
+    where svr_id = #{svrId,jdbcType=BIGINT}
+  </update>
+  
+  <!-- sql标签可以把通用语句块提取出来 -->
+  <sql id="service_where_clause">
+  	<where>
+       <!-- 客户  svr_cust_name  svrCustName
+			概要  svr_title	    svrTitle
+			创建时间	 svr_create_date  svrCreateDate
+			服务类型   svr_type         svrType
+			状态  svr_status     svrStatus
+		 -->
+     	 <if test="entity.svrCustName!=null and entity.svrCustName!=''">
+	    	 AND svr_cust_name LIKE '%${entity.svrCustName}%' 
+	     </if>
+	     <if test="entity.svrTitle!=null and entity.svrTitle!=''">
+	     	 AND svr_title LIKE '%${entity.svrTitle}%' 
+	     </if>
+	     <if test="ok!=null and ok!=''">
+	     	 AND svr_create_date LIKE '%${ok}%'
+	     </if>
+	     <!-- 下拉菜单不能使用模糊查询，应该完全匹配查询 -->
+	     <if test="entity.svrType!=null and entity.svrType!=''">
+	     	 AND svr_type = #{entity.svrType}
+	     </if>
+	     <if test="entity.svrStatus!=null and entity.svrStatus!=''">
+	     	 AND svr_status = #{entity.svrStatus}
+	     </if>
+  	 </where>
+  </sql>
+  
+    <!-- 添加分页查询的相关statement -->
+  <select id="selectListsByPageInfo" parameterType="com.crm.support.PageInfo" resultMap="BaseResultMap">	 
+     SELECT * FROM `cst_service` 
+     <include refid="service_where_clause"></include>
+  	 LIMIT #{start},#{pageSize}
+  </select>
+  
+  <!-- 查询条数 
+  		 SELECT  count(*) FROM  `sal_chance` where chc_status = '1'
+  		 根据条件查询。
+  -->
+  <select id="selectCountByPageInfo" parameterType="com.crm.support.PageInfo" resultType="int">
+  	 SELECT  count(*) FROM  `cst_service` 
+  	 <include refid="service_where_clause"></include>
+  </select>
+</mapper>
